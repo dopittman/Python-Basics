@@ -23,6 +23,8 @@ a = [1, 2, 3]
 b = [1, 2, 3]
 a == b # True
 a is b # False
+c = b
+b is c # True
 
 
 myNumber = input("Enter your favorite number: ")

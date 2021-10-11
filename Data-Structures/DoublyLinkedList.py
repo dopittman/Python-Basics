@@ -46,3 +46,21 @@ class DoublyLinkedList:
         # Set new_head node as tail node if there is not one currently
         if self.tail_node is None:
             self.tail_node = new_head
+
+        # Method to add Node to tail of DLList
+        def add_to_tail(self, new_value):
+            new_tail = Node(new_value)
+            current_tail = self.tail_node
+
+        # If there is a current tail, point it to new tail
+            if current_tail is not None:
+                current_tail.set_next_node(new_tail)
+                new_tail.set_prev_node(current_tail)
+
+            # Set DLList tail node value as new tail node
+            self.tail_node = new_tail
+
+            # Set new_tail node as head node if there is not one currently
+            if self.head_node is None:
+                self.head_node = new_tail
+                

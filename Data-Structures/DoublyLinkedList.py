@@ -63,4 +63,25 @@ class DoublyLinkedList:
             # Set new_tail node as head node if there is not one currently
             if self.head_node is None:
                 self.head_node = new_tail
-                
+
+        # Removes head node from DLList
+        def remove_head(self):
+            removed_head = self.head_node
+
+            # Checks if there is a head to remove
+            if removed_head is None:
+                return None
+
+            # Change DLList head node to the next node in the list
+            self.head_node = removed_head.get_next_node()
+
+            # Sets new head_node's prev_node to None
+            if self.head_node is not None:
+                self.head_node.set_prev_node(None)
+
+            # Removes the tail_node if the removed head node was also the tail_node
+            if removed_head is self.tail_node:
+                self.remove_tail()
+
+            # Return the value of the removed head node
+            return removed_head.get_value()

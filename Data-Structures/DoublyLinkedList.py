@@ -1,4 +1,3 @@
-
 #  Node class
 class Node:
     def __init__(self, value, next_node=None, prev_node=None):
@@ -21,6 +20,29 @@ class Node:
     def get_value(self):
         return self.value
 
+
 #  Doubly Linked List class
+
 class DoublyLinkedList:
-    pass
+
+    # Constructor
+    def __init__(self):
+        self.head_node = None
+        self.tail_node = None
+
+    # Adds Node to head of DLList
+    def add_to_head(self, new_value):
+        new_head = Node(new_value)
+        current_head = self.head_node
+
+        # If there is a current head, point it to new head
+        if current_head is not None:
+            current_head.set_prev_node(new_head)
+            new_head.set_next_node(current_head)
+
+        # Set new head as head_node of DLList
+        self.head_node = new_head
+
+        # Set new_head node as tail node if there is not one currently
+        if self.tail_node is None:
+            self.tail_node = new_head

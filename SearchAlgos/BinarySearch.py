@@ -99,3 +99,46 @@ print(binary_search([5, 6, 7, 8, 9], 10))
 print(binary_search([5, 6, 7, 8, 9], 8))
 print(binary_search([5, 6, 7, 8, 9], 4))
 print(binary_search([5, 6, 7, 8, 9], 6))
+
+
+# Binary search on a Sparsely Sorted Array (Array that has empty elements)
+
+def sparse_search(data, search_val):
+  print("Data: " + str(data))
+  print("Search Value: " + str(search_val))
+
+  first = 0
+  last = len(data) - 1
+
+  while first <= last:
+
+    mid = (first + last) // 2
+    if not data[mid]:
+      left = mid - 1
+      right = mid + 1
+
+      while True:
+        if left < first and right > last:
+          print("str")
+          print(str(search_val) + "is not in the dataset")
+          return
+        elif right <= last and data[right]:
+          mid = right
+          break
+        elif left >= first and data[left]:
+          mid = left
+          break
+
+        right += 1
+        left -= 1
+
+    if data[mid] == search_val:
+      print("{0} found at position {1}".format(search_val, mid))
+      return
+
+    elif search_val < data[mid]:
+      last = mid - 1
+    elif search_val > data[mid]:
+      first = mid + 1
+
+  print("{0} is not a valid dataset".format(data))

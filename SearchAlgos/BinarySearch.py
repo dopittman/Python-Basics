@@ -57,7 +57,7 @@ def binary_search(sorted_list, left_pointer, right_pointer, target):
     return binary_search(sorted_list, left_pointer, mid_idx, target)
   if mid_val < target:
     # we reduce the sub-list by passing in a new left_pointer
-    # the middle index now becomes the left pointer
+    # the middle index now becomes the left pointer + 1 since (left_pointer + right_pointer) // 2 rounds down
     return binary_search(sorted_list, mid_idx + 1, right_pointer, target)
 
 

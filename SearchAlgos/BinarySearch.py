@@ -1,7 +1,7 @@
 
 # Unoptimized Binary search that copies the array each time
 # define binary_search()
-def binary_search(sorted_list, target):
+def binary_search_copy_array(sorted_list, target):
   #   if list is empty, return 'value not found'
   if not sorted_list:
     return 'value not found'
@@ -18,14 +18,14 @@ def binary_search(sorted_list, target):
     #   [:index] returns everything before index
     left_half = sorted_list[:mid_idx]
     # recursively calls binary_search on the left_half array
-    return binary_search(left_half, target)
+    return binary_search_copy_array(left_half, target)
   if mid_val < target:
     # [mid_idx+1:] will return everything higher than the mid_idx
     # [index:] will return everything from index and higher, including index, hence the +1 to remove index from the
     # right_half array
     right_half = sorted_list[mid_idx+1:]
     # recursively calls binary_search on the right_half array
-    result = binary_search(right_half, target)
+    result = binary_search_copy_array(right_half, target)
     # if value is not found at all then return 'value not found'
     if result == "value not found":
       return result
@@ -34,13 +34,13 @@ def binary_search(sorted_list, target):
 
 # For testing:
 sorted_values = [13, 14, 15, 16, 17]
-print(binary_search(sorted_values, 16))
+print(binary_search_copy_array(sorted_values, 16))
 
 
 
 # Optimized Binary Search with Pointers
 
-def binary_search(sorted_list, left_pointer, right_pointer, target):
+def binary_search_pointers_recursive(sorted_list, left_pointer, right_pointer, target):
   # this condition indicates we've reached an empty "sub-list"
   if left_pointer >= right_pointer:
     return "value not found"
@@ -54,17 +54,17 @@ def binary_search(sorted_list, left_pointer, right_pointer, target):
   if mid_val > target:
     # we reduce the sub-list by passing in a new right_pointer
     # the middle index now becomes the right pointer
-    return binary_search(sorted_list, left_pointer, mid_idx, target)
+    return binary_search_pointers_recursive(sorted_list, left_pointer, mid_idx, target)
   if mid_val < target:
     # we reduce the sub-list by passing in a new left_pointer
     # the middle index now becomes the left pointer + 1 since (left_pointer + right_pointer) // 2 rounds down
-    return binary_search(sorted_list, mid_idx + 1, right_pointer, target)
+    return binary_search_pointers_recursive(sorted_list, mid_idx + 1, right_pointer, target)
 
 
 values = [77, 80, 102, 123, 288, 300, 540]
 start_of_values = 0
 end_of_values = len(values)
-result = binary_search(values, start_of_values, end_of_values, 288)
+result = binary_search_pointers_recursive(values, start_of_values, end_of_values, 288)
 
 print("element {0} is located at index {1}".format(288, result))
 
@@ -72,7 +72,7 @@ print("element {0} is located at index {1}".format(288, result))
 
 # Iterable version of binary search
 
-def binary_search(sorted_list, target):
+def binary_search_iterable(sorted_list, target):
   left_pointer = 0
   right_pointer = len(sorted_list)
 
@@ -94,11 +94,11 @@ def binary_search(sorted_list, target):
 
 
 # test cases
-print(binary_search([5, 6, 7, 8, 9], 9))
-print(binary_search([5, 6, 7, 8, 9], 10))
-print(binary_search([5, 6, 7, 8, 9], 8))
-print(binary_search([5, 6, 7, 8, 9], 4))
-print(binary_search([5, 6, 7, 8, 9], 6))
+print(binary_search_iterable([5, 6, 7, 8, 9], 9))
+print(binary_search_iterable([5, 6, 7, 8, 9], 10))
+print(binary_search_iterable([5, 6, 7, 8, 9], 8))
+print(binary_search_iterable([5, 6, 7, 8, 9], 4))
+print(binary_search_iterable([5, 6, 7, 8, 9], 6))
 
 
 # Binary search on a Sparsely Sorted Array (Array that has empty elements)
@@ -142,3 +142,22 @@ def sparse_search(data, search_val):
       first = mid + 1
 
   print("{0} is not a valid dataset".format(data))
+
+
+# Binary Search to find square root
+def binary_search_find_sqrt(x):
+  left, right = 0, x
+  while left <= right:
+    mid = left + (right - left) // 2
+
+    if mid * mid > x:
+      right = mid - 1
+    elif mid * mid < x:
+      left = mid + 1
+    else:
+      return mid
+
+  # left > right
+  return right
+
+print(binary_search_find_sqrt(8))

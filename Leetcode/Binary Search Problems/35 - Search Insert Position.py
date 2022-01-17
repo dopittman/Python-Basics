@@ -1,16 +1,18 @@
+from typing import List
+
+
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        left_pointer = 0
-        right_pointer = len(nums) - 1
-
-        while left_pointer <= right_pointer:
-            mid_idx = (left_pointer + right_pointer) // 2
-            mid_val = nums[mid_idx]
-
-            if mid_val == target:
-                return mid_idx
-            if mid_val < target:
-                left_pointer = mid_idx + 1
+        # Set pointers
+        low, high = 0, len(nums)
+        # Set condition for while loop
+        while low < high:
+            # Set mid_index
+            mid = (low + high) // 2
+            # if target is > mid_idx value move left pointer
+            if target > nums[mid]:
+                low = mid + 1
             else:
-                right_pointer = mid_idx - 1
-        return left_pointer
+                # if target is less than mid_idx value
+                high = mid
+        return low

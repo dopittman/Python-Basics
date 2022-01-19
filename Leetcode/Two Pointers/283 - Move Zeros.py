@@ -16,7 +16,7 @@
 # Runtime: 176 ms, faster than 59.98% of Python3 online submissions for Move Zeroes.
 # Memory Usage: 15.3 MB, less than 91.04% of Python3 online submissions for Move Zeroes.
 
-test = [0, 1, 0, 3, 12]
+test = [0, 11, 0, 3, 12]
 
 def run(list):
     left = 0
@@ -38,4 +38,20 @@ def run(list):
 
     return list
 
-print(run(test))
+
+# an optimal python solution
+# Has same runtime as mine technically but contains one less loop and less code
+def move_zeroes(nums):
+    slow = 0
+    for fast in range(len(nums)):
+        if nums[fast] != 0 and nums[slow] == 0:
+            nums[slow], nums[fast] = nums[fast], nums[slow]
+
+        # wait while we find a non-zero element to
+        # swap with you
+        if nums[slow] != 0:
+            slow += 1
+    return nums
+
+
+print(move_zeroes(test))

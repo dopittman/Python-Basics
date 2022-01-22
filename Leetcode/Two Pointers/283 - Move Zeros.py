@@ -20,18 +20,16 @@ test = [0, 11, 0, 3, 12]
 
 def run(list):
     left = 0
-    right = 0
     n = len(list)
     num_of_zeros = 0
 
+    # i works a the right pointer
     for i in range(n):
-        if list[right] != 0:
+        if list[i] != 0:
             list[left] = list[i]
-            right += 1
             left += 1
         elif list[i] == 0:
             num_of_zeros += 1
-            right +=1
 
     for i in range(n - num_of_zeros, n, 1):
         list[i] = 0
@@ -54,4 +52,4 @@ def move_zeroes(nums):
     return nums
 
 
-print(move_zeroes(test))
+print(run(test))

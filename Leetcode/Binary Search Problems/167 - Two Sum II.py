@@ -18,3 +18,29 @@
 
 test1 = [2,7,11,15]
 test2 = [2,3,4]
+test3 = [-1,0]
+
+
+# Runtime: 64 ms, faster than 76.30%
+
+def run(nums, target):
+    left = 0
+    right = len(nums) -1
+
+    while left < right:
+        total_value = nums[left] + nums[right]
+
+        if total_value == target:
+            # +1 due to the answer required being the index + 1
+            return left + 1, right + 1
+        #  if total value is higher than the target, reduce the right index by 1
+        if total_value > target:
+            right -= 1
+        #  if total value is lower than the target, increase the left index by 1
+        else:
+            left += 1
+
+    return(-1,-1)
+
+
+print(run(test1, 9))

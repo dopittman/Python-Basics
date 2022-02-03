@@ -23,3 +23,20 @@
 # Input: n = 2, pick = 1
 # Output: 1
 
+# My solution
+
+class Solution:
+    def guessNumber(self, n: int, pick) -> int:
+        left = 1
+        right = n
+
+        while left <= right:
+            mid_val = (left + right) // 2
+
+            # replaced with 'guess(mid_vap)' function in leetcode ide
+            if mid_val == pick:
+                return mid_val
+            elif mid_val > pick:
+                right = mid_val
+            else:
+                left = mid_val + 1

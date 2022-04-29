@@ -18,3 +18,33 @@
 # Explanation: In this case, no transactions are done and the max profit = 0.
 
 
+# First iteration, uses if statements to adjust current values
+def maxProfit(arr):
+    min = 0
+    max = 1
+    currentProfit = 0
+
+    while max < len(arr):
+        if arr[max] < arr[min]:
+            min = max
+        elif (arr[max] - arr[min]) > currentProfit:
+            currentProfit = arr[max] - arr[min]
+        max += 1
+    return currentProfit
+
+
+    # Second Iteration, Is a little more concise and clear. Fewer if-statements
+    def maxProfit2(self, prices: List[int]) -> int:
+
+        minInd = 0
+        maxInd = 1
+        currentProfit = 0
+
+        while maxInd < len(prices):
+            if prices[maxInd] > prices[minInd]:
+                newProfit = prices[maxInd] - prices[minInd]
+                currentProfit = max(currentProfit, newProfit)
+            else:
+                minInd = maxInd
+            maxInd += 1
+        return currentProfit
